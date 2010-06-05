@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 # coding=utf-8
 import sys
+import time
+import threading
 import gtk
+import gtk.gdk
 import pygtk
 import gnomeapplet
- 
+
 pygtk.require('2.0')
+gtk.gdk.threads_init()
 
 class TrafficApplet(gnomeapplet.Applet):
     def __init__(self, applet, iid): 
@@ -20,7 +24,15 @@ class TrafficApplet(gnomeapplet.Applet):
         eventbox.add(self.label)
         self.applet.connect('destroy', self.callback_destroy)
         self.applet.show_all()
-        self.label.set_text(self.get_traffic('bnep0')) # TODO: settings
+        self.monitoring_thread()
+
+    def monitoring_thread(self):
+        threading.Thread(target=self.monitoring_loop).start()
+
+    def monitoring_loop(self):
+        while 'python rocks':
+            self.label.set_text(self.get_traffic('bnep0')) # TODO: settings
+            time.sleep(1)
  
     def get_traffic(self, interface):
         try:
