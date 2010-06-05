@@ -46,7 +46,7 @@ def applet_factory(applet, iid):
  
 if __name__ == '__main__':
     if len(sys.argv) == 2:
-        if sys.argv[1] == 'run-in-window':
+        if sys.argv[1] == '--run-in-window':
             window = gtk.Window(gtk.WINDOW_TOPLEVEL)
             window.set_title('Traffic Monitor')
             window.connect('destroy', gtk.main_quit)
@@ -56,9 +56,9 @@ if __name__ == '__main__':
             window.show_all()
             gtk.main()
             sys.exit()
-        elif sys.argv[1] == 'help':
+        elif sys.argv[1] == '--help':
             print '''
-            --run-in-window - run applet independent of gnome-panel
+            --run-in-window - run the applet in a window
             --help - show this message'''
     else:
         gnomeapplet.bonobo_factory('OAFIID:GNOME_Traffic_Factory',
