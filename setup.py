@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from distutils.core import setup
 
 setup(name='Traffic Applet',
@@ -9,4 +10,4 @@ setup(name='Traffic Applet',
                   ('/usr/bin', ['traffic_factory.py']),
                   ('/usr/lib/bonobo/servers', ['GNOME_TrafficApplet.server']),
                  ],
-     )
+)
