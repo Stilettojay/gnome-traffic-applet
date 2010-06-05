@@ -6,6 +6,9 @@ setup(name='Traffic Applet',
       description='Gnome Panel applet for monitoring your traffic.',
       author='MyFreeWeb',
       url='http://github.com/myfreeweb/gnome-traffic-applet/',
+      packages=[
+                 'traffic_applet',
+               ],
       scripts=[
                 'traffic_factory.py',
               ],
