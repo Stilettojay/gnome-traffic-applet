@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # coding=utf-8
 import sys
-import os
 import gtk
 import pygtk
-import gnome
 import gnomeapplet
  
 pygtk.require('2.0')
@@ -14,12 +12,12 @@ class TrafficApplet(gnomeapplet.Applet):
         self.kb = lambda a: int(a)/1024
         self.applet = applet
         self.applet.set_name('Traffic Applet')
-        self.hbox = gtk.HBox()
-        self.eventbox = gtk.EventBox()
+        hbox = gtk.HBox()
+        eventbox = gtk.EventBox()
         self.label = gtk.Label()
-        self.applet.add(self.hbox)
-        self.hbox.add(self.eventbox)
-        self.eventbox.add(self.label)
+        self.applet.add(hbox)
+        hbox.add(eventbox)
+        eventbox.add(self.label)
         self.applet.connect('destroy', self.callback_destroy)
         self.applet.show_all()
         self.label.set_text(self.get_traffic('bnep0')) # TODO: settings
@@ -61,7 +59,7 @@ if __name__ == '__main__':
             --run-in-window - run the applet in a window
             --help - show this message'''
     else:
-        gnomeapplet.bonobo_factory('OAFIID:GNOME_Traffic_Factory',
+        gnomeapplet.bonobo_factory('OAFIID:GNOME_TrafficApplet_Factory',
                                    TrafficApplet.__gtype__,
                                    'Traffic Applet',
                                    '0.9',
