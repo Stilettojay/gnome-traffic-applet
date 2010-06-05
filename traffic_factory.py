@@ -16,6 +16,7 @@ class TrafficApplet(gnomeapplet.Applet):
         self.kb = lambda a: int(a)/1024
         self.applet = applet
         self.applet.set_name('Traffic Applet')
+        self.tooltips = gtk.Tooltips()
         hbox = gtk.HBox()
         eventbox = gtk.EventBox()
         self.label = gtk.Label()
@@ -32,9 +33,12 @@ class TrafficApplet(gnomeapplet.Applet):
 
     def monitoring_loop(self):
         while self.monitoring_active:
-            self.label.set_text(self.get_traffic('bnep0')) # TODO: settings
+            traffic = self.get_traffic('bnep0') # TODO: settings
+            total = traffic[0] + traffic[1]
+            self.label.set_text('%s kb' % total)
+            self.tooltips.set_tip(self.applet, '%s kb down, %s kb up' % traffic)
             time.sleep(1)
- 
+            
     def get_traffic(self, interface):
         try:
             STAT_PATH = '/sys/class/net/' + interface + '/statistics/'
@@ -44,7 +48,7 @@ class TrafficApplet(gnomeapplet.Applet):
             txfile = open(STAT_PATH + 'tx_bytes', 'r')
             tx_kb = self.kb(txfile.read())
             txfile.close()
-            return '%s kb / %s kb' % (rx_kb, tx_kb)
+            return (rx_kb, tx_kb)
         except IOError:
             return 'Offline'
 
