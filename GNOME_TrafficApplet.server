@@ -15,9 +15,7 @@
         <item value='IDL:Bonobo/Unknown:1.0' />
     </oaf_attribute>
     <oaf_attribute name='name' type='string' value='Traffic Applet' />
-    <oaf_attribute name='name-ru' type='string' value='Апплет трафика' />
     <oaf_attribute name='description' type='string' value='Shows network traffic' />
-    <oaf_attribute name='description-ru' type='string' value='Отображает сетевой трафик' />
     <oaf_attribute name='panel:category' type='string' value='Utility' />
     <oaf_attribute name='panel:icon' type='string' value='computer.png' />
 </oaf_server>
