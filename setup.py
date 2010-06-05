@@ -6,8 +6,10 @@ setup(name='Traffic Applet',
       description='Gnome Panel applet for monitoring your traffic.',
       author='MyFreeWeb',
       url='http://github.com/myfreeweb/gnome-traffic-applet/',
+      scripts=[
+                'traffic_factory.py',
+              ],
       data_files=[
-                  ('/usr/bin', ['traffic_factory.py']),
-                  ('/usr/lib/bonobo/servers', ['GNOME_TrafficApplet.server']),
+                   ('/usr/lib/bonobo/servers', ['GNOME_TrafficApplet.server']),
                  ],
 )
