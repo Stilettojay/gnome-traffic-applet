@@ -24,13 +24,14 @@ class TrafficApplet(gnomeapplet.Applet):
         eventbox.add(self.label)
         self.applet.connect('destroy', self.callback_destroy)
         self.applet.show_all()
-        self.monitoring_thread()
+        self.monitoring_active = True
+        self.start_monitoring_thread()
 
-    def monitoring_thread(self):
+    def start_monitoring_thread(self):
         threading.Thread(target=self.monitoring_loop).start()
 
     def monitoring_loop(self):
-        while 'python rocks':
+        while self.monitoring_active:
             self.label.set_text(self.get_traffic('bnep0')) # TODO: settings
             time.sleep(1)
  
@@ -48,6 +49,7 @@ class TrafficApplet(gnomeapplet.Applet):
             return 'Offline'
 
     def callback_destroy(self, applet):
+        self.monitoring_active = False
         del self.applet
 
 def applet_factory(applet, iid):
